@@ -1,0 +1,194 @@
+<div class="header pb-6 d-flex align-items-center" style="min-height: 200px; background-image: url(<?= base_url('assets/dashboard_admin/'); ?>img/theme/Hims.jpeg); background-size: cover; background-position: center top;">
+    <span class="mask bg-gradient-dark opacity-7"></span>
+        <!-- Header container -->
+        <?php foreach ($editviewers as $ev) { ?>
+        <div class="container-fluid d-flex align-items-center">
+            <div class="col-lg-6 col-7 p-0">
+                <nav aria-label="breadcrumb" class="d-none d-md-inline-block">
+                    <ol class="breadcrumb breadcrumb-links breadcrumb-dark m-0">
+                        <li class="breadcrumb-item"><a href="<?= base_url('admin');?>"><i class="fas fa-home"></i></a></li>
+                        <li class="breadcrumb-item"><a href="<?= base_url('data/dataviewers');?>">Viewers Management</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Edit Viewers</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+    <!-- Page content -->
+    <div class="container-fluid mt--6">
+        <div class="row">
+            <div class="col-xl-8 order-xl-1">
+                <?= form_open_multipart('data/update'); ?>
+                <input type="hidden" class="form-control" id="id" name="id" value="<?= $ev->id ?>">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="row align-items-center">
+                            <div class="col">
+                                <h3 class="mb-0"><strong>Edit Profile Viewers</strong></h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h6 class="heading-small text-muted mb-4">User information</h6>
+                        <div class="pl-lg-4">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="input-username">Username</label>
+                                        <input type="text" class="form-control" id="name" name="name" value="<?= $ev->name; ?>">
+                                        <?= form_error('name', '<small class="text-danger">', '</small>'); ?>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="input-email">Email address</label>
+                                        <input type="text" class="form-control" id="email" name="email" value="<?= $ev->email; ?>" readonly>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="birthdate">Date of birth</label>
+                                        <input type="date" id="birthdate" name="birthdate" class="form-control" placeholder="Date of birth" value="<?= $ev->birthdate; ?>">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="gender">Gender</label>
+                                        <div class="pt-2">
+                                        <?php
+                                        if ($ev->gender == 'Male') {
+                                            echo '<input type="radio" name="gender"  value="Male" checked>Male
+                                            <input type="radio" name="gender" value="Female">Female';
+                                        } else {
+                                                echo '<input type="radio" name="gender" value="Male">Male
+                                            <input type="radio" name="gender" value="Female" checked>Female';
+                                        }
+                                        ?>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <hr class="my-4" />
+                        <!-- Address -->
+                        <h6 class="heading-small text-muted mb-4">Contact information</h6>
+                        <div class="pl-lg-4">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="address">Address</label>
+                                        <input type="text" id="address" name="address" class="form-control" placeholder="Home Address" value="<?= $ev->address;?>">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="city">City</label>
+                                        <input type="text" id="city" name="city" class="form-control" placeholder="City" value="<?= $ev->city;?>">
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="country">Country</label>
+                                        <input type="text" id="country" name="country" class="form-control" placeholder="Country" value="<?= $ev->country;?>">
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="postcode">Postal code</label>
+                                        <input type="number" id="postcode" name="postcode" class="form-control" placeholder="Postal code" value="<?= $ev->postcode;?>">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="phone">Phone Number</label>
+                                        <input type="text" id="phone" name="phone" class="form-control" placeholder="Phone Number" value="<?= $ev->phone;?>">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <hr class="my-4" />
+                        <!-- Description -->
+                        <h6 class="heading-small text-muted mb-4">User control</h6>
+                        <div class="pl-lg-4">
+                        <div class="row">
+                            <div class="col-lg-4">
+                            <div class="form-group">
+                                <label class="form-control-label" for="gender">Role</label>
+                                <div class="pt-2">
+                                <?php
+                                if ($ev->role_id == '1') {
+                                    echo '<input type="radio" name="role_id"  value="1" checked>Admin
+                                    <input type="radio" name="role_id" value="2">Member';
+                                } else {
+                                    echo '<input type="radio" name="role_id" value="1">Admin
+                                <input type="radio" name="role_id" value="2" checked>Member';
+                                }
+                                ?>
+                                </div>
+                            </div>
+                            </div>
+                            <div class="col-lg-4">
+                            <div class="form-group">
+                                <label class="form-control-label" for="gender">Active</label>
+                                <div class="pt-2">
+                                <?php
+                                if ($ev->is_active == '1') {
+                                    echo '<input type="radio" name="is_active"  value="1" checked>Active
+                                    <input type="radio" name="is_active" value="0">Not Active';
+                                } else {
+                                    echo '<input type="radio" name="is_active" value="1">Active
+                                <input type="radio" name="is_active" value="0" checked>Not Active';
+                                }
+                                ?>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                        </div>
+                        <hr class="my-4" />
+                        <!-- Description -->
+                        <h6 class="heading-small text-muted mb-4">About me</h6>
+                        <div class="pl-lg-4">
+                            <div class="form-group">
+                                <label class="form-control-label">About Me</label>
+                                <textarea rows="4" class="form-control" placeholder="A few words about you ...">A beautiful Dashboard for Bootstrap 4. It is Free and Open Source.</textarea>
+                            </div>
+                        </div>
+                        <div class="pl-lg-4">
+                            <div class="form-group">
+                                <label class="form-control-label">Picture</label>
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <img src="<?= base_url('assets/dashboard_admin/img/profile/') . $ev->image; ?>" class="img-thumbnail">
+                                    </div>
+                                    <div class="col-sm-9">
+                                        <div class="custom-file">
+                                            <input type="file" class="custom-file-input" id="image" name="image">
+                                            <label class="custom-file-label" for="image">Choose file</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <hr class="my-3" />
+                        <div class="row align-items-center">
+                            <div class="col-lg-12 col-12 text-right">
+                                <a href="<?= base_url('data/detail_viewers/' . $ev->id) ?>" class="btn btn-primary btn-sm" role="button" aria-pressed="true">Detail</a>
+                                <button type="reset" class="btn btn-sm btn-danger">Reset</button>
+                                <button type="submit" class="btn btn-sm btn-success">Save Change</button>
+                            </div>
+                        </div>
+                        </form>
+                    </div>
+                    <div class="card-footer" style="padding: 0;border-bottom-width: 8px;">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <?php } ?>
